@@ -1,0 +1,8 @@
+Escreva dois programas equivalentes, em TypeScript, que solicitem que o usuário digite
+dois números, n1 e n2. O programa deve dizer se o n1 é “menor ou igual a n2” ou se é “maior
+do que n2”. Um programa deve utilizar o bloco switch e o outro deve utilizar if-else.
+
+Pergunta: Qual dificuldade surgiria caso se desejasse que o programa discriminasse 3 condições (>, < ou =)?
+
+Resposta: A principal dificuldade utilizando a estrutura if-else é que quanto mais atribuições se da para ele mais complexo fica o código, o que dificulta a sua leitura.
+Já usando a estrutura switch case seria até melhor, pois sua estrutura facilida na adição de mais atribuições.
