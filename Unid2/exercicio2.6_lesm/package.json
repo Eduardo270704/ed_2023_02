@@ -1,0 +1,14 @@
+{
+  "name": "exercicio2.6_lesm",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "24": "npx ts-node ./src/algoritmosrecursivos24_lesm",
+    "25": "ts-node ./src/algoritmosrecursivos25_lesm",
+    "26": "ts-node ./src/algoritmosrecursivos26_lesm"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
