@@ -1,0 +1,12 @@
+{
+  "name": "prova-3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "p3": "npx ts-node .src/33.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
