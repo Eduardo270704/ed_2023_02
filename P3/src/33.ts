@@ -7,30 +7,42 @@ function lerArquivo(filename: string): string {
   return readFileSync(join(__dirname, filename), "utf-8");
 }
 
-function buscar(
-  texto: string,
-  palavra: string
-): { ocorrencias: number[]; deslocamentos: number } {
-  const ocorrencias: number[] = [];
-  const tamanhoPalavra = palavra.length;
-  let deslocamentos: number = 0;
-  for (let i = 0; i <= texto.length - tamanhoPalavra; i++) {
-    const substring = texto.substring(i, i + tamanhoPalavra);
-    if (substring === palavra) {
-      ocorrencias.push(i);
-    }
-    deslocamentos++;
-  }
-  return { ocorrencias, deslocamentos };
-}
+/* Basic sequential and binary search
+ ** algorithms implemented in TypeScript
+ **
+ ** Author: Fabrício Galende M. de Carvalho, DSc
+ */
 
 class Search<T> {
-  sequential(e: T, v: T[]): number {
-    let pos: number = -1;
-    for (let i: number = 0; i < v.length; ++i) {
-      if (e == v[i]) return i;
+  /* Por não ter a presença do professo Fabricio em, fiz dois métodos separados
+  um mais semelhante ao original fornecido no repósitorio https://github.com/fabriciogmc/algorithms_and_data_structures_ts
+  Sendo esse o sequential_array
+  E um método que tomei mais liberdade para editar que ao meu ver atende mais o que é pedido na questão 3.3. atribuida a mim para a prova 3
+  de Estrutura de Dados*/
+  sequential_array(e: T, v: T[]): { ocorrencias: number[]; deslocamentos: number } {
+    const ocorrencias: number[] = [];
+    let deslocamentos: number = 0;
+    for (let i = 0; i < v.length; i++) {
+      deslocamentos++;
+      if (v[i] === e) {
+        ocorrencias.push(i+1);
+      }
     }
-    return pos;
+    return { ocorrencias, deslocamentos };
+  }
+
+  //
+  sequential_string(e: string, v: string): { ocorrencias: number[]; deslocamentos: number } {
+    const ocorrencias: number[] = [];
+    let deslocamentos: number = 0;
+    for (let i = 0; i <= v.length - e.length; i++) {
+      const substring = v.substring(i, i + e.length);
+      deslocamentos++;
+      if (substring === e) {
+        ocorrencias.push(i);
+      }
+    }
+    return { ocorrencias, deslocamentos };
   }
 
   sequential_w(e: T, v: T[]): number {
@@ -86,19 +98,24 @@ class Search<T> {
   }
 }
 
+const search = new Search<string>();
+
 let filename: string = prompt(
   `Digite o caminho e o nome do seu arquivo .txt: `
 );
+
 const fileContent: string = lerArquivo(filename);
 console.log(`Texto do txt: ${fileContent}`);
-let palavraBuscada: string = prompt(
+
+let searchedWord: string = prompt(
   `Digite a palavra que deseja encontrar em seu arquivo: `
 );
 
-const search = new Search<string>();
-const fileContentArray = fileContent.split(/\s+/); // Dividir o conteúdo do arquivo em um array de palavras
-const resultadoBusca = search.sequential(palavraBuscada, fileContentArray);
+let arrayFileContent = fileContent.split(" ");
+//console.log(arrayFileContent);
 
-console.log(
-  `A palavra "${palavraBuscada}" foi encontrada na posição: ${resultadoBusca}`
-);
+const resultado_array = search.sequential_array(searchedWord, arrayFileContent);
+console.log("Buscando como um array, a palavra procurada aparece nas posições:", resultado_array.ocorrencias, "e foi necessário", resultado_array.deslocamentos, "deslocamentos para chegar a essa conclusão");
+
+const resultado_string = search.sequential_string(searchedWord, fileContent);
+console.log("Buscando como um string, a palavra procurada aparece nas posições:", resultado_string.ocorrencias, "e foi necessário", resultado_string.deslocamentos, "deslocamentos para chegar a essa conclusão");
